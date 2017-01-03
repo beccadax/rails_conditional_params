@@ -11,23 +11,7 @@ module RailsConditionalParams
     #     params.permit(:title, :body, published: admin?)
     #     # Result only includes published if admin? is true.
     def permit_with_conditional_params(*filters)
-      filters.each do |filter|
-        if filter.is_a? Hash
-          filter.delete_if do |key, value|
-            case value
-            when TrueClass
-              filters << key
-              true
-            when FalseClass, NilClass
-              # do nothing
-              true
-            else
-              false
-            end
-          end
-        end
-      end
-    
+      RailsConditionalParams.restructure_filters! filters
       permit_without_conditional_params(*filters)
     end
   
