@@ -6,6 +6,8 @@ Basically, it ensures that any hash key passed to `permit()` with `true` as
 its value is made into a permitted key, while keys passed with `false` or `nil`
 are ignored.
 
+It is compatible with Rails 4.2 and later, including Rails 5.
+
 ## Installation
 
 Add this line to your application's Gemfile:
