@@ -1,5 +1,5 @@
 module RailsConditionalParams
-  module Patch
+  module PrependPatch
     # Adds support for conditional params:
     # 
     #     params.permit(yes: true, no: false)
@@ -10,13 +10,9 @@ module RailsConditionalParams
     # 
     #     params.permit(:title, :body, published: admin?)
     #     # Result only includes published if admin? is true.
-    def permit_with_conditional_params(*filters)
+    def permit(*filters)
       RailsConditionalParams.restructure_filters! filters
-      permit_without_conditional_params(*filters)
-    end
-  
-    def Patch.included(other)
-      other.alias_method_chain :permit, :conditional_params
+      super(*filters)
     end
   end
 end
